@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gin Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            margin-bottom: 40px;
+            width: fit-content;
+            height: 400px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .container h1 {
+            color: #dadada;
+            font-size: 32px;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+            margin: 20px;
+            pointer-events: auto;
+        }
+
+        .container:hover h1 {
+            opacity: 1;
+        }
+
+        .image-container {
+            width: 350px;
+            height: 350px;
+            margin: 50px;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Termekeink</h1>
+        <div class="image-container">
+            <img src="image1.jpg" alt="Image 1">
+        </div>
+        <div class="image-container">
+            <img src="image2.jpg" alt="Image 2">
+        </div>
+        <div class="image-container">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+    </div>
+    <div class="container">
+        <h1>Elerhetosegek</h1>
+        <div class="image-container">
+            <img src="image4.jpg" alt="Image 4">
+        </div>
+        <div class="image-container">
+            <img src="image5.jpg" alt="Image 5">
+        </div>
+        <div class="image-container">
+            <img src="image6.jpg" alt="Image 6">
+        </div>
+    </div>
+    <div class="container">
+        <h1>Megkozelites</h1>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var headings = document.querySelectorAll('.container h1');
+
+            headings.forEach(function(heading) {
+                var fadeTimer;
+                var isHovered = false;
+
+                heading.addEventListener('mouseover', function() {
+                    isHovered = true;
+                    clearInterval(fadeTimer);
+                    fadeIn();
+                });
+
+                heading.addEventListener('mouseout', function() {
+                    isHovered = false;
+                    fadeTimer = setInterval(fadeOut, 10);
+                });
+
+                function fadeIn() {
+                    var opacity = parseFloat(heading.style.opacity);
+                    if (opacity < 1 && isHovered) {
+                        opacity += 0.05;
+                        heading.style.opacity = opacity;
+                        requestAnimationFrame(fadeIn);
+                    }
+                }
+
+                function fadeOut() {
+                    var opacity = parseFloat(heading.style.opacity);
+                    if (opacity > 0.3 && !isHovered) {
+                        opacity -= 0.05;
+                        heading.style.opacity = opacity;
+                    } else {
+                        clearInterval(fadeTimer);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
